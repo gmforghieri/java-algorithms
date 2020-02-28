@@ -79,10 +79,15 @@ public class DLList {
      *     The element to add.
      */
     public void addFirst(Object e) {
-        Node successor = head.getNext();
-        Node newest = new Node(e, head, successor);
-        head.setNext(newest);
-        successor.setPrevious(newest);
+        Node newest = new Node(e, null, null);
+        if(head == null) {
+            head = newest;
+            tail = newest;
+        } else {
+            newest.setNext(head);
+            head.setPrevious(newest);
+            head = newest;
+        }
     }
 
     /**
