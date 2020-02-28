@@ -108,10 +108,16 @@ public class DLList {
      *     The element to add.
      */
     public void addLast(Object e) {
-        Node predecessor = tail.getPrevious();
-        Node newest = new Node(e, predecessor, tail);
-        tail.setPrevious(newest);
-        predecessor.setNext(newest);
+        Node n = new Node(e, null, null);
+
+        if(tail == null) {
+            head = n;
+            tail = n;
+        } else {
+            tail.setNext(n);
+            n.setPrevious(tail);
+            tail = n;
+        }
     }
 
     /**
