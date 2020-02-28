@@ -172,7 +172,32 @@ public class DLList {
      * @return The element of the Node in position pos. If there is no Node in position pos, this method returns null.
      */
     public Object removeFromPosition(int pos) {
-        // TODO
+        if(head==null) {
+            return null;
+        }
+        if(pos>size()) {
+            return null;
+        }
+        if(pos<0) {
+            return null;
+        }
+
+        Node node = head;
+        for(int i = 0; i<pos; i++) {
+            node = node.getNext();
+        }
+        if (node == head)
+        {
+            return removeFirst();
+        }
+        if (node == tail)
+        {
+            return removeLast();
+        }
+        Object ob1 = node.getElement();
+        node.getPrevious().setNext(node.getNext());
+        node.getNext().setPrevious(node.getPrevious());
+        return ob1;
     }
 
     /**
