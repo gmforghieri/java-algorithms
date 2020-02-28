@@ -54,9 +54,8 @@ public class DLList {
      * Constructor: initialises the head and tail fields as null
      */
     public DLList() {
-        head = new Node(null, null, null);
-        tail = new Node(null, head, null);;
-        head.setNext(tail);
+        head = null;
+        tail = null;
     }
 
     /**
@@ -93,15 +92,13 @@ public class DLList {
      */
     public Object removeFirst() {
 
-        if(head.getNext() == tail) {
+        if(head == null) {
             return null;
         }
 
-        Node toRemove = head.getNext();
-        Node successor = toRemove.getNext();
-        head.setNext(successor);
-        successor.setPrevious(head);
-        return toRemove.getElement();
+        head = head.getNext();
+
+        return getHead();
     }
 
     /**
@@ -182,6 +179,17 @@ public class DLList {
      * @return A new DLL that contains the elements of the current one in reversed order.
      */
     public DLList reverse() {
-        // TODO
+        DLList list = new DLList();
+
+        if(tail == null) {
+            return list;
+        }
+
+        for(Node node = tail; node != null; node = node.getPrevious()) {
+            list.addLast(node.getElement());
+        }
+
+        return list;
     }
+
 }
