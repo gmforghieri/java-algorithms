@@ -121,15 +121,19 @@ public class DLList {
      */
     public Object removeLast() {
 
-        if(tail.getPrevious() == head) {
-            return null;
+        if(tail == null) return null;
+
+        Object tailElement = getTail();
+
+        if(tail.getPrevious() == null) {
+            head = null;
+            tail = null;
+        } else {
+            tail.getPrevious().setNext(null);
+            tail = tail.getPrevious();
         }
 
-        Node toRemove = tail.getPrevious();
-        Node predecessor = toRemove.getPrevious();
-        tail.setPrevious(predecessor);
-        predecessor.setNext(tail);
-        return toRemove.getElement();
+        return tailElement;
     }
 
     /**
