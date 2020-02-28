@@ -92,13 +92,18 @@ public class DLList {
      */
     public Object removeFirst() {
 
-        if(head == null) {
+        if(head==null) {
             return null;
         }
-
-        head = head.getNext();
-
-        return getHead();
+        Object ob = getHead();
+        if (head.getNext() == null) {
+            head = null;
+            tail = null;
+        } else {
+            head.getNext().setPrevious(null);
+            head = head.getNext();
+        }
+        return ob;
     }
 
     /**
