@@ -157,7 +157,27 @@ public class DLList {
      *     The element to add.
      */
     public void addAtPosition(int pos, Object e) {
-        Node newest = new Node(e, null, null);
+        if (head==null) {
+            return;
+        }
+
+        if (pos<0) {
+            addLast(e);
+            return;
+        }
+
+        Node node = head;
+        if (pos<size()) {
+            for(int i = 0; i<pos; i++) {
+                node = node.getNext();
+            }
+            Node newnode = new Node(e, node.getPrevious(), node);
+            node.getPrevious().setNext(newnode);
+            node.setPrevious(newnode);
+        }
+        else {
+            addLast(e);
+        }
 
 
     }
